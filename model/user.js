@@ -19,6 +19,18 @@ const userSchema =  new Schema({
         default:  Date.now // como esse campo não sera setado, o valor default de inserção é date.now
     }
 });
+// Function sempre executará antes de salvar;
+/*
+userSchema.pre('save', async function(next){
+    let user = this;
 
+    if(!user.isModified('password')){
+        return next();
+    }
+    user.password =  await bcrypt.hash(user.password, 10);
+
+    return next();
+});
+*/
 
 module.exports = model('users', userSchema);
