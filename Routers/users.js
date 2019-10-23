@@ -3,6 +3,18 @@ const router = express.Router();
 
 const users = require('../model/user');
 
+const jwt = require('jsonwebtoken');
+
+//This function is going to help to create tokens
+
+const createUserToken = (userId) => {
+
+    // First param :This token is gonna be created based on userId
+    // Sec. param: A password
+    //Third param: Token's expiration date
+    return jwt.sign({ id: userId }, 'k11sgknd', { expiresIn: '7d' });
+}
+
 //const bcrypt = require('bcrypt');
 
 //endpoints
@@ -35,7 +47,7 @@ router.post('/create', async (req, res) => {
         const data = await users.create(req.body);
 
         data.password = undefined; // nao revelar a senha do usuário
-        return res.send(data);
+        return res.send({ data ,  token: createUserToken(data.id)});
 
     }catch(e){
         return res.send({ erro: 'Erro ao buscar usuário!'})        
@@ -57,7 +69,7 @@ router.post('/auth', async (req, res) => {
 
         data.password = undefined;
 
-        return res.send(data);
+        return res.send({ data ,  token: createUserToken(data.id)});
     }catch(e) {
         return res.send({ error: 'Erro a buscar usuário!'});
     }
