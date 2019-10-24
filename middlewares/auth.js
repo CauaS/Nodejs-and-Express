@@ -5,7 +5,7 @@ const auth = (req, res, next) => {
 
     //if token doesn't exist
     if(!token_header){
-        return res.send({ error: 'Autentificação Negada!'});
+        return res.status(401).send({ error: 'Autentificação não enviado!'});
     } 
 
     jwt.verify(token_header, 'k11sgknd', (err, decoded) => {
@@ -13,7 +13,7 @@ const auth = (req, res, next) => {
         res.locals.auth_data = decoded;
 
         //if an erro come out send error, else everything is good so next();
-        return err ? res.send({ error: 'Token Inválido'}) : next();
+        return err ? res.status(401).send({ error: 'Token Inválido'}) : next();
 
     })
 }
