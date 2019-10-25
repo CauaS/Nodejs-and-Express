@@ -1,0 +1,16 @@
+///////////////////////////////////////////////////////////////////////
+
+200 - ok
+201 - Created
+202 - Accepted
+
+400 - bad request.
+401 - Unauthorized -  Autentificação (temporário).
+402 - Forbidden - Autozização (Permanente).
+404 - Not found.
+
+500 - internal Error.
+501 - Not implemented -  Api não possui essa funcionalidade.
+503 - Service Unavaliable - Operação indisponível.
+
+///////////////////////////////////////////////////////////////////////
