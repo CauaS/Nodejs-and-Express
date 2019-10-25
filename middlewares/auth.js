@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 
+const config = require('../config/setting');
+const { jwtPass } = config;
+
 const auth = (req, res, next) => {
     const token_header = req.headers.auth;
 
@@ -8,7 +11,7 @@ const auth = (req, res, next) => {
         return res.status(401).send({ error: 'Autentificação não enviado!'});
     } 
 
-    jwt.verify(token_header, 'k11sgknd', (err, decoded) => {
+    jwt.verify(token_header, jwtPass, (err, decoded) => {
 
         res.locals.auth_data = decoded;
 
