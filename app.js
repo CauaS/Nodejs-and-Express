@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 //string de conexão
-const url = 'mongodb+srv://caligiuri:cali123@cluster0-vcmdw.mongodb.net/bdTinderDev?retryWrites=true&w=majority';
+const url = 'mongodb+srv://cali:cali123@api-rest-didwk.mongodb.net/test?retryWrites=true&w=majority';
 
 const options = { 
     reconnectTries: Number.MAX_VALUE,
