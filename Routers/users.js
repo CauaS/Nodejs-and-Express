@@ -5,6 +5,9 @@ const users = require('../model/user');
 
 const jwt = require('jsonwebtoken');
 
+const config = require('../config/setting');
+const { jwtPass, jwtExpiresIn } = config;
+
 //This function is going to help to create tokens
 
 const createUserToken = (userId) => {
@@ -12,7 +15,7 @@ const createUserToken = (userId) => {
     // First param :This token is gonna be created based on userId
     // Sec. param: A password
     //Third param: Token's expiration date
-    return jwt.sign({ id: userId }, 'k11sgknd', { expiresIn: '7d' });
+    return jwt.sign({ id: userId }, jwtPass, { expiresIn: jwtExpiresIn });
 }
 
 //const bcrypt = require('bcrypt');
@@ -43,8 +46,6 @@ router.post('/create', async (req, res) => {
     if(!email || !password){
         return res.status(400).send({ 
             message: 'Dados insuficientes!',
-            email : email, 
-            password: password
         });
     }
 
